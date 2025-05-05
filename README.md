@@ -5,6 +5,111 @@ This project focused on detecting human posture using stereovision techniques. A
 
 The first chapter of the thesis introduces the primary goal of developing a human posture detection system using stereovision and deep learning techniques. It highlights the importance of posture analysis in fields like healthcare, ergonomics, and sports science, while addressing the challenges of accurate 3D posture detection. The chapter includes a literature review on various methods of pose estimation, including traditional motion capture systems, deep convolutional neural networks, and the use of recurrent neural networks (RNNs) for temporal analysis. It also examines the advantages of stereovision over other 3D reconstruction methods like LiDAR or Kinect, emphasizing its potential for low-cost, accurate results. Finally, the chapter outlines the project’s objectives, including building a dual-camera system for 2D keypoint extraction, converting these points into 3D coordinates, and training an RNN for accurate 3D posture prediction.
 
+**Mathematical representation:**
+
+Points in 2D space are represented as \( u \) and \( v \), corresponding to the x and y coordinates on the image:
+
+$$
+m = \begin{bmatrix} u \\ v \end{bmatrix}
+\qquad \widetilde{m} = \begin{bmatrix} u \\ v \\ 1 \end{bmatrix}
+$$
+
+Points in 3D space are represented as:
+
+$$
+M = \begin{bmatrix} X \\ Y \\ Z \end{bmatrix}
+\qquad
+\widetilde{M} = \begin{bmatrix} X \\ Y \\ Z \\ 1 \end{bmatrix}
+$$
+
+Camera intrinsic parameter matrix:
+
+$$
+K = \begin{bmatrix}
+f_x & s & c_x \\
+0 & f_y & c_y \\
+0 & 0 & 1
+\end{bmatrix}
+$$
+
+- \( c_x \), \( c_y \) – principal point coordinates,
+- \( f_x \), \( f_y \) – scaling factors,
+- \( s \) – parameter describing angular distortion of the two image axes.
+
+Rotation matrix around the x-axis, representing a rotation by angle \( \alpha \):
+
+$$
+R_x(\alpha) = 
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & \cos(\alpha) & -\sin(\alpha) \\
+0 & \sin(\alpha) & \cos(\alpha)
+\end{bmatrix}
+$$
+
+Rotation matrix around the y-axis, representing a rotation by angle \( \beta \):
+
+$$
+R_y(\beta) = 
+\begin{bmatrix}
+\cos(\beta) & 0 & \sin(\beta) \\
+0 & 1 & 0 \\
+-\sin(\beta) & 0 & \cos(\beta)
+\end{bmatrix}
+$$
+
+Rotation matrix around the z-axis, representing a rotation by angle \( \gamma \):
+
+$$
+R_z(\gamma) = 
+\begin{bmatrix}
+\cos(\gamma) & -\sin(\gamma) & 0 \\
+\sin(\gamma) & \cos(\gamma) & 0 \\ 
+0 & 0 & 1
+\end{bmatrix}
+$$
+
+Combined rotation matrix:
+
+$$
+R = R_z(\gamma) R_y(\beta) R_x(\alpha)
+$$
+
+Camera translation vector, describing its position:
+
+$$
+\mathbf{t} =
+\begin{bmatrix}
+t_1 \\
+t_2 \\
+t_3
+\end{bmatrix}
+$$
+
+- \( t_1 \) – camera translation along the x-axis,
+- \( t_2 \) – camera translation along the y-axis,
+- \( t_3 \) – camera translation along the z-axis.
+
+Camera extrinsic parameter matrix:
+
+$$
+[R \,|\, t] =
+\begin{bmatrix}
+R_{11} & R_{12} & R_{13} & t_1 \\
+R_{21} & R_{22} & R_{23} & t_2 \\
+R_{31} & R_{32} & R_{33} & t_3
+\end{bmatrix}
+$$
+
+The relationship between 2D and 3D points:
+
+$$
+\lambda \widetilde{m} = K \begin{bmatrix} R & t \end{bmatrix} M
+$$
+
+- \( \lambda \) – scaling factor,
+- \( R \), \( t \) – camera extrinsic parameters, representing the position and orientation in space.
+
 ## Calibration and synchronization of the cameras
 This chapter focuses on the calibration and synchronization of the cameras, which are essential for accurate 3D human posture detection. It explains the process of calibrating both cameras to eliminate lens distortions and align their intrinsic and extrinsic parameters. Synchronization of the cameras is discussed, ensuring both capture frames simultaneously to maintain the precision of depth estimation. The chapter also describes the data collection process, where images are captured under various conditions to build a diverse dataset for pose estimation and 3D reconstruction. Overall, it emphasizes the importance of proper calibration, synchronization, and data collection for the accuracy and reliability of the system.
 
