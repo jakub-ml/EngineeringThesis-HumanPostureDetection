@@ -113,16 +113,33 @@ $$
 ## Calibration and synchronization of the cameras
 This chapter focuses on the calibration and synchronization of the cameras, which are essential for accurate 3D human posture detection. It explains the process of calibrating both cameras to eliminate lens distortions and align their intrinsic and extrinsic parameters. Synchronization of the cameras is discussed, ensuring both capture frames simultaneously to maintain the precision of depth estimation. The chapter also describes the data collection process, where images are captured under various conditions to build a diverse dataset for pose estimation and 3D reconstruction. Overall, it emphasizes the importance of proper calibration, synchronization, and data collection for the accuracy and reliability of the system.
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/2dc585fc-c475-49bc-b68a-1c0462c7e80f" alt="image">
+</p>
+
 ## Data Preparation and Processing
 The chapter on "Data Preparation and Processing" discusses the essential steps taken to collect, organize, and preprocess the data required for the human posture detection system. Initially, the process of camera calibration and synchronization is outlined, ensuring that the dual-camera setup captures synchronized video streams with precise alignment. The chapter then describes the procedure for extracting 2D keypoints from the synchronized video feeds using a pre-trained pose estimation model. It goes on to explain the transformation of these 2D points into 3D coordinates using stereovision techniques such as triangulation. Furthermore, data augmentation methods and normalization techniques are employed to ensure that the neural network receives diverse, high-quality input, helping to improve the model's performance and robustness for predicting human posture over time.
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/46fd2fed-be18-4d6b-9f3c-39128c49296a" alt="image">
+</p>
 
 ## Training Activity Detection Models
 The chapter on "Training Activity Detection Models" focuses on the development and training of machine learning models to detect and predict human activities based on posture data. It begins by discussing the selection of appropriate deep learning architectures, with a particular emphasis on recurrent neural networks (RNNs), including Long Short-Term Memory (LSTM) and Gated Recurrent Units (GRU), for their ability to capture temporal dependencies in human movement. The chapter details the process of training the models using labeled datasets of human poses, where the 3D coordinates obtained from the stereovision system are used as input. It also addresses the challenges encountered during training, such as overfitting, and outlines the techniques used to mitigate these issues, including dropout and early stopping. Finally, the chapter evaluates the performance of the trained models, presenting results on their ability to accurately classify and predict human activities in real-time, based on the 3D posture data.
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/d81db2a2-f285-43c4-84f8-d2f9928e8883" alt="image">
+</p>
+
 ## Application
 The "Application" chapter focuses on the practical implementation and deployment of the human posture detection system. It begins with the design of a user-friendly interface, where real-time posture tracking and activity detection are displayed to the user, providing immediate feedback on their movements. The chapter discusses the integration of the previously trained models into a functional application, detailing the steps taken to ensure that the system operates efficiently with live data from the dual-camera setup. It also covers the challenges of optimizing the application for speed and accuracy, ensuring smooth synchronization of the cameras and reliable processing of the 3D pose data. Finally, the chapter highlights the application’s potential use cases, including healthcare, fitness tracking, and ergonomic assessments, emphasizing how it can be employed in real-world scenarios to monitor and improve posture and movement.
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/f67935bb-1924-415c-ae2e-7ef202fd4c69" alt="image">
+</p>
 
+## Results
+The goal of this engineering project was to develop a system for human activity recognition using stereovision technology. A stereo camera setup was calibrated and synchronized, enabling the use of the BlazePose model to extract 3D body keypoints through triangulation. The collected 3D trajectories were used to train recurrent neural networks (Simple RNN, GRU, LSTM) for classifying five types of actions, achieving over 90% accuracy on validation data. A lightweight application was built using Gradio, allowing users to perform calibration and activity recognition without technical knowledge. The results confirm that accurate and efficient human activity recognition is feasible with low hardware requirements and offers potential for further real-world and commercial applications.
 
 
 
